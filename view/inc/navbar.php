@@ -1,7 +1,7 @@
 <div class='navbar'>
 
     <div class='logo-container'>
-        <a href="."><img src="view/img/shortiii-logo-3.jpg" alt="website logo"></a>
+        <a href="."><img src="/url-shortener/view/img/shortiii-logo-3.jpg" alt="website logo"></a>
     </div>
     <div class='links-container'>
         <div><a href=".">Home</a></div>

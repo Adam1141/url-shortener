@@ -22,3 +22,8 @@
      * 
      */
     const ROOT_URL = "localhost";
+    const REDIRECT_REGEX = "/" . ROOT_URL . "\/\d+$/i";  // to check if current url is for redirect ( short to long url )
+
+    // NOT IMPLEMENTED YET! ( no time )
+    // change the shortened URL allowed characters
+    const ALLOWED_CHARS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

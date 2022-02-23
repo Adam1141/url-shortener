@@ -46,8 +46,10 @@
             // print_r($link);
             // echo "<br>" . $link['longUrl'];
 
-            // return the corresponding long url
-            return $link['longUrl'];
+            // return the corresponding long url, if not found then return ROOT_URL
+            if($link)
+                return $link['longUrl'];
+            return ROOT_URL;
         }
 
         public static function extractIdFromShortUrl($shortUrl) {
@@ -69,7 +71,7 @@
 
             $longUrl = self::getLongUrlForShortUrl($shortUrl);
             header("Location: http://$longUrl");
-
+            exit();
         }
 
     }
