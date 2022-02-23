@@ -1,1 +1,6 @@
-$current_link = "shorten";
+<?php 
+    
+?>
+<section >
+    <h2>Shorten</h2>
+</section>

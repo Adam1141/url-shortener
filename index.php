@@ -35,14 +35,38 @@ if(preg_match(REDIRECT_REGEX, $current_url)){
 }
 
 
-session_start();
 
-$title = 'Shortiii';
-$_SESSION["current_link"] ??= "Home";
+// above this line is for redirects, shortened url gets redirected to matching long url
+// *****************************************************************************
+// below this line is navigating website and actions logic
+
+
+
+session_start();
 
 include "view/inc/header.php";
 
-// include "view/pages/link_info.php";
+
+$request_uri =  $_SERVER["REQUEST_URI"];
+
+switch($request_uri){
+    case "/home":
+        include("view/pages/home.php");
+        break;
+    case "/shorten":
+        include("view/pages/shorten.php");
+        break;
+    case "/link-info":
+        include("view/pages/link_info.php");
+        break;
+    case "/about":
+        include("view/pages/about.php");
+        break;
+}
+
+
+
+
 
 
 

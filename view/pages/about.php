@@ -1,1 +1,6 @@
-$current_link = "about";
+<?php 
+    
+?>
+<section >
+    <h2>About</h2>
+</section>
