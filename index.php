@@ -1,5 +1,5 @@
 <?php 
-
+    require_once('model/shortener.php');
 // test database from singleton - WORKSS!!!!
 // require_once('model/db_conn.php');
 // $db = dbConn::getConnection();
@@ -7,6 +7,15 @@
 // $stmt->execute(['id' => 2]);
 // $link = $stmt->fetch();
 // print_r($link);
+
+// test
+// Shortener::shortenLongUrlAndReturnId("www.facebook.com");
+
+// echo "long url for id:3 -> " . Shortener::getLongUrlForShortUrl("localhost/3");
+
+// Shortener::extractIdFromShortUrl('localhost/8');
+
+// Shortener::redirectFromShortUrlToLongUrl("localhost/8");
 
 session_start();
 
