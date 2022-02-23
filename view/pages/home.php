@@ -1,8 +1,8 @@
 <?php
 
 ?>
-<section class="home-section">
-    <img class="home-bg" src="/url-shortener/view/img/layered-waves-haikei.svg#svgView(preserveAspectRatio(none))" alt="wavy background image">
+<section class="home-section section">
+    <img class="page-bg" src="/url-shortener/view/img/home-bg.svg#svgView(preserveAspectRatio(none))" alt="wavy background image">
 
     <div class="home-top">
         <h2>Shortiii</h2>

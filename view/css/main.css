@@ -19,7 +19,8 @@ body {
     min-height: 100vh;
     min-width: 100vw;
     /* background-color: dodgerblue; */
-    background-color: white;
+    background-color: black;
+    color: white;
     overflow-y: hidden;
 
 }
@@ -31,6 +32,14 @@ main {
     width: 90%;
     max-width: 1200px;
     
+}
+
+.page-bg {
+    display: block;
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    z-index: -1;
 }
 
 .navbar {
@@ -88,24 +97,25 @@ footer {
     background-color: white;
 }
 
-
-/* home */
-.home-section {
+.section {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
-
 }
 
-.home-bg {
+/* home */
+.home-section {
+    color: white;
+}
+
+/* .home-bg {
     display: block;
     position: absolute;
     width: 100vw;
     height: 100%;
     z-index: -1;
-}
+} */
 
 .align-center {
     text-align: center;
@@ -174,4 +184,6 @@ footer {
     border-radius: 20px 5px 20px 5px;
     transition: 1s;
 }
+
+/* about */
 

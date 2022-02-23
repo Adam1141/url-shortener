@@ -19,7 +19,7 @@ function handleNavbarLinkOnclick(event) {
     console.log(event.target.innerText)
 }
 
-function addOnlickEventListenersForNavbarLinks() {
+function addOnClickEventListenersForNavbarLinks() {
     const links = document.querySelectorAll(".navbar .links-container a");
     // console.log(links)
     if(!links) return;
@@ -35,7 +35,7 @@ function handleStartShorteningOnclick(event) {
     localStorage.setItem("currentTab", "shorten");
 }
 
-function addOnlickEventListenersStartShortening() {
+function addOnClickEventListenersStartShortening() {
     const link = document.querySelector(".start-shortening");
     // console.log(link)
     if(!link) return;
@@ -43,12 +43,27 @@ function addOnlickEventListenersStartShortening() {
     link.addEventListener('click', handleStartShorteningOnclick)
 }
 
+function handleLogoOnclick(event) {
+    localStorage.setItem("currentTab", "home");
+}
+
+function addOnClickEventListenerForLogo() {
+    const link = document.querySelector(".logo-container a");
+    // console.log(link)
+    if(!link) return;
+    link.removeEventListener('click', handleLogoOnclick)
+    link.addEventListener('click', handleLogoOnclick)
+}
+
+
+
 (() => {
     window.onload = () => {
         // console.log(localStorage.getItem('currentTab'))
         window.currentTab = localStorage.getItem("currentTab") || "Home";
         highlightNavbarLinkByName(window.currentTab);
-        addOnlickEventListenersForNavbarLinks();
-        addOnlickEventListenersStartShortening();
+        addOnClickEventListenersForNavbarLinks();
+        addOnClickEventListenersStartShortening();
+        addOnClickEventListenerForLogo();
     }
 })()
