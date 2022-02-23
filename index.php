@@ -48,9 +48,11 @@ function set_url($url)
 }
 
 // read from post request to /shorten/create
-$long_url = filter_input(INPUT_POST, 'long_url', FILTER_VALIDATE_DOMAIN);
+$long_url = isset($_POST['long_url']) ? $_POST['long_url'] : "";
 
 
+// read from post request to /link-info-get-details
+$short_url = isset($_POST['short_url']) ? $_POST['short_url'] : "";
 
 include "view/inc/header.php";
 
@@ -77,6 +79,11 @@ switch ($request_uri) {
         $short_url = ROOT_URL . '/' . $short_id;
         set_url("/shorten");
         include("view/pages/shorten.php");
+        break;
+    case "/link-info/get-details":
+        $link_info = Shortener::getLinkInfoByShortUrl($short_url);
+        include("view/pages/link_info.php");
+        set_url("/link-info");
         break;
 }
 

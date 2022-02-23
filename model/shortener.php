@@ -56,7 +56,9 @@
             // extract and return the short url id from the short url
             // return -1 in case of an error
 
+            // $shortUrl = "localhost/12";
             $shortUrlExploded = explode("/", $shortUrl);
+            // print_r($shortUrlExploded);
             $linkId = $shortUrlExploded[count($shortUrlExploded) - 1];
             
             // test
@@ -74,6 +76,24 @@
             exit();
         }
 
+        public static function getLinkInfoByShortUrl($shortUrl) {
+            $linkId = self::extractIdFromShortUrl($shortUrl);
+
+            // echo "linkId => " . $linkId;
+
+            // get db connection and read link info with id from the given short url
+            $db = dbConn::getConnection();
+            $stmt = $db->prepare('SELECT * FROM urls WHERE id = :id');
+            $stmt->execute(['id' => $linkId]);
+            $linkInfo = $stmt->fetch();
+
+            // print_r($linkInfo);
+            
+
+            $linkInfo['passHash'] = "";
+            return $linkInfo;
+
+        }
     }
 
 
