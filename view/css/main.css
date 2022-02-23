@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -12,18 +15,26 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     display: flex;
     flex-direction: column;
+    align-items: center;
     min-height: 100vh;
-    background-color: dodgerblue;
+    min-width: 100vw;
+    /* background-color: dodgerblue; */
+    background-color: white;
     overflow-y: hidden;
 
 }
 
 main {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 1200px;
     
 }
 
 .navbar {
+    width: 100vw;
     height: var(--navbar-height);
     background-color: black;
     display: flex;
@@ -62,6 +73,7 @@ main {
 }
 
 footer {
+    width: 100vw;
     font-size: 0.75rem;
     display: flex;
     justify-content: center;
@@ -75,3 +87,91 @@ footer {
     color: black !important;
     background-color: white;
 }
+
+
+/* home */
+.home-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+
+}
+
+.home-bg {
+    display: block;
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    z-index: -1;
+}
+
+.align-center {
+    text-align: center;
+}
+
+#column {
+    float: left;
+    width: 33.33%;
+    min-height: 210px;
+    padding: 0 10px;
+    text-align: center;   
+}
+
+#row:after {
+    display: table;
+    content: "";
+    clear: both;
+}
+
+.home-top {
+    flex: 1;
+}
+
+.home-bottom {
+    color: white;
+
+    /* to make png icons white color only */
+    filter: brightness(0) invert(1);
+}
+
+.home-section .home-top h2 {
+    font-size: 4rem;
+    font-family: 'Yellowtail', cursive;
+
+}
+
+.home-section .home-top h3 {
+    font-size: 2rem;
+    font-family: 'Comfortaa', cursive;
+    margin-bottom: 2rem;
+}
+
+.home-section .home-top p {
+    font-size: 1.5rem;
+    font-family: 'Comfortaa', cursive;
+}
+
+.start-shortening {
+    display: block;
+    width: fit-content;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(213, 100, 100);
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    transition: 0.3s;
+    font-size: 2rem;
+    font-family: 'Comfortaa', cursive;
+
+}
+
+.start-shortening:hover {
+    opacity: 0.7;
+    transform: scale(1.03);
+    border-radius: 20px 5px 20px 5px;
+    transition: 1s;
+}
+

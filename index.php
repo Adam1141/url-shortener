@@ -46,11 +46,12 @@ session_start();
 
 include "view/inc/header.php";
 
-
+// current page from browser uri
 $request_uri =  $_SERVER["REQUEST_URI"];
 
+// handles navigation between different pages
 switch($request_uri){
-    case "/home":
+    case "/":
         include("view/pages/home.php");
         break;
     case "/shorten":

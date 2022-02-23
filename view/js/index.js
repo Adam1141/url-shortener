@@ -22,13 +22,26 @@ function handleNavbarLinkOnclick(event) {
 function addOnlickEventListenersForNavbarLinks() {
     const links = document.querySelectorAll(".navbar .links-container a");
     // console.log(links)
-    // console.log(linkName)
+    if(!links) return;
     links.forEach(link => {
-        link.removeEventListener('click', handleNavbarLinkOnclick);
-        link.addEventListener('click', handleNavbarLinkOnclick);
+        if(link){
+            link.removeEventListener('click', handleNavbarLinkOnclick);
+            link.addEventListener('click', handleNavbarLinkOnclick);
+        }
     }) 
 }
 
+function handleStartShorteningOnclick(event) {
+    localStorage.setItem("currentTab", "shorten");
+}
+
+function addOnlickEventListenersStartShortening() {
+    const link = document.querySelector(".start-shortening");
+    // console.log(link)
+    if(!link) return;
+    link.removeEventListener('click', handleStartShorteningOnclick)
+    link.addEventListener('click', handleStartShorteningOnclick)
+}
 
 (() => {
     window.onload = () => {
@@ -36,5 +49,6 @@ function addOnlickEventListenersForNavbarLinks() {
         window.currentTab = localStorage.getItem("currentTab") || "Home";
         highlightNavbarLinkByName(window.currentTab);
         addOnlickEventListenersForNavbarLinks();
+        addOnlickEventListenersStartShortening();
     }
 })()
