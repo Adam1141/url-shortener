@@ -1,5 +1,5 @@
-<?php 
-    require_once('model/shortener.php');
+<?php
+require_once('model/shortener.php');
 // test database from singleton - WORKSS!!!!
 // require_once('model/db_conn.php');
 // $db = dbConn::getConnection();
@@ -30,7 +30,7 @@
 // if the current url in the browser matches a redirect regular expression
 // then perform a redirect to the corresponding website/link 
 $current_url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
-if(preg_match(REDIRECT_REGEX, $current_url)){
+if (preg_match(REDIRECT_REGEX, $current_url)) {
     Shortener::redirectFromShortUrlToLongUrl($current_url);
 }
 
@@ -39,10 +39,18 @@ if(preg_match(REDIRECT_REGEX, $current_url)){
 // above this line is for redirects, shortened url gets redirected to matching long url
 // *****************************************************************************
 // below this line is navigating website and actions logic
-
-
-
 session_start();
+
+// used to change url in browser
+function set_url($url)
+{
+    echo ("<script>history.replaceState({},'','$url');</script>");
+}
+
+// read from post request to /shorten/create
+$long_url = filter_input(INPUT_POST, 'long_url', FILTER_VALIDATE_DOMAIN);
+
+
 
 include "view/inc/header.php";
 
@@ -50,11 +58,12 @@ include "view/inc/header.php";
 $request_uri =  $_SERVER["REQUEST_URI"];
 
 // handles navigation between different pages
-switch($request_uri){
+switch ($request_uri) {
     case "/":
         include("view/pages/home.php");
         break;
     case "/shorten":
+        $short_id = "123123";
         include("view/pages/shorten.php");
         break;
     case "/link-info":
@@ -62,6 +71,12 @@ switch($request_uri){
         break;
     case "/about":
         include("view/pages/about.php");
+        break;
+    case "/shorten/create":
+        $short_id = Shortener::shortenLongUrlAndReturnId($long_url);
+        $short_url = ROOT_URL . '/' . $short_id;
+        set_url("/shorten");
+        include("view/pages/shorten.php");
         break;
 }
 
