@@ -88,6 +88,10 @@ class Shortener
         $stmt = $db->prepare('UPDATE urls SET clicks = clicks + 1 WHERE id = :id');
         $stmt->execute(['id' => $linkId]);
 
+        // add to url_redirects table
+        $stmt = $db->prepare("INSERT INTO url_redirects(shortUrlId, clientIpAddress) VALUES(?,?)");
+        $stmt->execute([$linkId, $_SERVER['REMOTE_ADDR']]);
+
         $longUrl = self::getLongUrlForShortUrl($shortUrl);
         if (!preg_match(HTTP_REGEX, $longUrl))
             $longUrl = "http://" . $longUrl;
@@ -95,11 +99,12 @@ class Shortener
         exit();
     }
 
+
+
     public static function getLinkInfoByShortUrl($shortUrl, $linkPass = -1)
     {
         $linkId = self::extractIdFromShortUrl($shortUrl);
         $linkPass = $linkPass == "" ? -1 : $linkPass;
-
         // echo "linkId => " . $linkId;
         // echo "password: " . $linkPass;
         // echo "<br> linkPass != -1 : " . (($linkPass == -1)?"true":"false");
@@ -110,14 +115,18 @@ class Shortener
         $stmt->execute(['id' => $linkId]);
         $linkInfo = $stmt->fetch();
 
+        $stmt = $db->prepare('INSERT INTO link_info_requests(shortUrlId, clientIpAddress, requestStatus) VALUES(?,?,?)');
+        
         // print_r($linkInfo);
-
+        
         // check if the given password isn't a match
         if (isset($linkInfo['passHash']) && $linkInfo['passHash'] != -1 && !password_verify($linkPass, $linkInfo['passHash'])) {
+            $stmt->execute([$linkId, $_SERVER['REMOTE_ADDR'], "fail"]);
             return;
         }
-
-
+        
+        
+        $stmt->execute([$linkId, $_SERVER['REMOTE_ADDR'], "success"]);
         $linkInfo['passHash'] = "";
         return $linkInfo;
     }
