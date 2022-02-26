@@ -8,7 +8,7 @@ class dbConn{
 	protected static $db;
 		
 	private function __construct() {
-		require "config.php";
+		global $dsn, $username, $password, $options;
 		try {
 			// assign PDO object to db variable 
 			self::$db = new PDO( $dsn, $username, $password, $options );

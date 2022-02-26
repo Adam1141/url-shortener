@@ -1,6 +1,7 @@
 <?php
-require_once('model/shortener.php');
 require_once('model/config.php');
+require_once('model/shortener.php');
+
 // test database from singleton - WORKSS!!!!
 // require_once('model/db_conn.php');
 // $db = dbConn::getConnection();
