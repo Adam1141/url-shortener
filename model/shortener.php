@@ -130,4 +130,9 @@ class Shortener
         $linkInfo['passHash'] = "";
         return $linkInfo;
     }
+
+    public static function reportUrl($shortUrl) {
+        $db = dbConn::getConnection();
+        $stmt = $db->prepare('INSERT INTO reported_urls()');
+    }
 }

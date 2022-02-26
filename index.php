@@ -95,13 +95,8 @@ switch ($request_uri) {
         include("view/pages/link_info.php");
         set_url("/link-info");
         break;
+
 }
-
-
-
-
-
-
 
 
 include "view/inc/footer.php";
