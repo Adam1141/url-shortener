@@ -1,7 +1,6 @@
 <?php
 require_once('model/db_conn.php');
 require_once('model/link.php');
-$db = dbConn::getConnection();
 
 class Shortener
 {

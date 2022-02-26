@@ -7,7 +7,13 @@
     <h2>Shorten</h2>
     <div class="shorten-top shorten-div">
         <form class="shorten-form" action="/shorten/create" method="post">
-            <input type="text" name="long_url" placeholder="long url" value="<?= $long_url ??= "" ?>">
+            <input type="text" name="long_url" placeholder="long url" value="<?php
+                                                                                if (isset($long_url) && $long_url) {
+                                                                                    echo $long_url;
+                                                                                } else {
+                                                                                    echo "";
+                                                                                }
+                                                                                ?>">
             <input type="password" name="link_pass" placeholder="link password (optional)">
             <input type="submit" value="Get Short URL">
         </form>
