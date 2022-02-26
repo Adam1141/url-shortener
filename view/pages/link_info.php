@@ -6,7 +6,8 @@ $_SESSION["current_link"] = "Link Info";
     <h2>Link Info</h2>
     <div class="info-div">
         <form action="link-info/get-details" method="post">
-            <input type="text" name="short_url" placeholder="enter short url..">
+            <input type="text" name="short_url" placeholder="short url" value="<?= $short_url ??= "" ?>">
+            <input type="password" name="link_pass" placeholder="link password (optional)">
             <input type="submit" value="Get Link Info">
         </form>
         <h3 class="align-center">Link Info</h3>
@@ -17,8 +18,8 @@ $_SESSION["current_link"] = "Link Info";
                         if($k == "passHash") continue;
                         echo $k . ": " . $v . "<br>";
                     }
-                }else{
-                    echo "not fetched yet.";
+                }else if(isset($requested_info)){
+                    echo "bad url or non-matching password.";
                 }
             
             ?>

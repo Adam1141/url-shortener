@@ -5,12 +5,10 @@
         public $longUrl;
         public $clicks;
         public $status;
-        public $passHash;
+        public $passHash = -1;
         public $dateCreated;
 
         function __construct($longUrl){
             $this->longUrl = $longUrl;
         }
     }
-
-?>

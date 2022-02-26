@@ -39,7 +39,6 @@ if (preg_match(REDIRECT_REGEX, $current_url)) {
 // above this line is for redirects, shortened url gets redirected to matching long url
 // *****************************************************************************
 // below this line is navigating website and actions logic
-session_start();
 
 // used to change url in browser
 function set_url($url)
@@ -51,8 +50,11 @@ function set_url($url)
 $long_url = isset($_POST['long_url']) ? $_POST['long_url'] : "";
 
 
-// read from post request to /link-info-get-details
+// read from post request to /link-info/get-details
 $short_url = isset($_POST['short_url']) ? $_POST['short_url'] : "";
+
+// password from link info or shorten page (optional)
+$link_pass = isset($_POST['link_pass']) &&  $_POST['link_pass'] ?  $_POST['link_pass'] : -1;
 
 include "view/inc/header.php";
 
@@ -75,13 +77,21 @@ switch ($request_uri) {
         include("view/pages/about.php");
         break;
     case "/shorten/create":
-        $short_id = Shortener::shortenLongUrlAndReturnId($long_url);
+        // to prevent error message showing without Get Short URL button click
+        // used in shorten.php
+        $requested_create = true;
+        
+        $short_id = Shortener::shortenLongUrlAndReturnId($long_url, $link_pass);
         $short_url = ROOT_URL . '/' . $short_id;
         set_url("/shorten");
         include("view/pages/shorten.php");
         break;
     case "/link-info/get-details":
-        $link_info = Shortener::getLinkInfoByShortUrl($short_url);
+        // to prevent error message showing without Get Link Info button click
+        // used in link_info.php
+        $requested_info = true;
+
+        $link_info = Shortener::getLinkInfoByShortUrl($short_url, $link_pass);
         include("view/pages/link_info.php");
         set_url("/link-info");
         break;

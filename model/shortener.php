@@ -6,12 +6,16 @@ $db = dbConn::getConnection();
 class Shortener
 {
 
-    public static function shortenLongUrlAndReturnId($longUrl)
+    public static function shortenLongUrlAndReturnId($longUrl, $linkPass = -1)
     {
         // add url to database/urls , get the autoincremented id of the inserted row
         // return that id
         $linkObj = new Link($longUrl);
         $linkObj->dateCreated = date('Y-m-d');
+
+        // echo "shortenLongUrlAndReturnId -> linkPass: " . $linkPass;
+
+        $linkObj->passHash = $linkPass == -1 ? $linkPass : password_hash($linkPass, PASSWORD_DEFAULT);
 
         // test
         // echo $linkObj->getLongUrl();
@@ -19,9 +23,9 @@ class Shortener
 
         // get db connection and insert new url
         $db = dbConn::getConnection();
-        $stmt = $db->prepare("INSERT INTO urls (longUrl, dateCreated)
-            VALUES (?,?)");
-        $stmt->execute([$linkObj->longUrl, $linkObj->dateCreated]);
+        $stmt = $db->prepare("INSERT INTO urls (longUrl, dateCreated, passHash)
+            VALUES (?,?,?)");
+        $stmt->execute([$linkObj->longUrl, $linkObj->dateCreated, $linkObj->passHash]);
 
         // test
         // echo ("last id -> " . $db->lastInsertId());
@@ -91,11 +95,14 @@ class Shortener
         exit();
     }
 
-    public static function getLinkInfoByShortUrl($shortUrl)
+    public static function getLinkInfoByShortUrl($shortUrl, $linkPass = -1)
     {
         $linkId = self::extractIdFromShortUrl($shortUrl);
+        $linkPass = $linkPass == "" ? -1 : $linkPass;
 
         // echo "linkId => " . $linkId;
+        // echo "password: " . $linkPass;
+        // echo "<br> linkPass != -1 : " . (($linkPass == -1)?"true":"false");
 
         // get db connection and read link info with id from the given short url
         $db = dbConn::getConnection();
@@ -104,6 +111,11 @@ class Shortener
         $linkInfo = $stmt->fetch();
 
         // print_r($linkInfo);
+
+        // check if the given password isn't a match
+        if (isset($linkInfo['passHash']) && $linkInfo['passHash'] != -1 && !password_verify($linkPass, $linkInfo['passHash'])) {
+            return;
+        }
 
 
         $linkInfo['passHash'] = "";

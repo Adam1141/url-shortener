@@ -5,11 +5,27 @@
  *
  */
 
+/**/
 $host       = "localhost";
 $username   = "root";
 $password   = "";
-$dbname     = "url_shortener_php";
-$dsn        = "mysql:host=$host;dbname=$dbname";
+
+
+/*
+$host       = '129.159.147.245';
+$username   = 'testdb';
+$password   = 'test';
+*/
+
+/*
+$host       = 'sql6.freemysqlhosting.net';
+$username   = 'sql6475572';
+$password   = 'q2JtFYfcd6';
+$dbname     = 'sql6475572';
+ */
+
+$dbname     = 'url_shortener_php';
+$dsn        = "mysql:dbname=$dbname;host=$host;";
 $options    = array(
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
