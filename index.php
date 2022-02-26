@@ -56,6 +56,7 @@ $short_url = isset($_POST['short_url']) ? $_POST['short_url'] : "";
 
 include "view/inc/header.php";
 
+
 // current page from browser uri
 $request_uri =  $_SERVER["REQUEST_URI"];
 
@@ -65,7 +66,6 @@ switch ($request_uri) {
         include("view/pages/home.php");
         break;
     case "/shorten":
-        $short_id = "123123";
         include("view/pages/shorten.php");
         break;
     case "/link-info":

@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="/url-shortener/view/css/normalize.css">
     <link rel="stylesheet" href="/url-shortener/view/css/main.css">
     <script src="/url-shortener/view/js/index.js"></script>
-    <title><?= isset($title) ? $title : 'Shortinooo' ?></title>
+    <title><?= isset($title) ? $title : 'Shortiii' ?></title>
 
 </head>
 
 <body>
-    <?php include "view/inc/navbar.php" ?>
+    <?php include "view/inc/navbar.php"; ?>
+    <!-- <?php echo "cwd: " . getcwd() . "<br> document root: " . $_SERVER['DOCUMENT_ROOT']; ?> -->
     <main>
